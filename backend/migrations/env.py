@@ -8,12 +8,12 @@ from sqlalchemy import pool
 
 from alembic import context
 
-
-load_dotenv("../.env")
-
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+
+load_dotenv("../.env")
+config.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -30,7 +30,6 @@ target_metadata = Base.metadata
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
-config.set_main_option("sqlalchemy.url", os.environ["DATABASE_URL"])
 
 
 def run_migrations_offline() -> None:
